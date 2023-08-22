@@ -2,7 +2,6 @@
 const fs = require('fs');
 
 const myText = fs.readFileSync('./txt/input.txt', 'utf-8');
-
 const textOut = `
 This is what we know about the avocado:\n${myText}
 Created on ${Date.now()}
