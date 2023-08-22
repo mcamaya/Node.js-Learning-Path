@@ -97,3 +97,36 @@ fs.readFile('./txt/start.txt', 'utf-8', (err, data1) => {
 });
 ```
 
+## Modulos Personalizados
+En Node.js, tenemos la capacidad de desarrollar nuestros propios módulos utilizando la función `module.exports` (o bien `export` en ES6). Dado que en Node.js cada archivo se considera un módulo, podemos fragmentar nuestro código en secciones más pequeñas. Este enfoque nos permite lograr un mayor orden y legibilidad en nuestro código, al dividirlo en componentes más manejables.
+```
+module.exports = (temp, product) => {
+    let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
+    output = output.replace(/{%IMAGE%}/g, product.image);
+    output = output.replace(/{%PRICE%}/g, product.price);
+    output = output.replace(/{%FROM%}/g, product.from);
+    output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
+    output = output.replace(/{%QUANTITY%}/g, product.quantity);
+    output = output.replace(/{%DESCRIPTION%}/g, product.description);
+    output = output.replace(/{%ID%}/g, product.id);
+    !product.organic ? output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic') : output.replace(/{%NOT_ORGANIC%}/g, 'organic-wii');
+    return output;
+}
+
+```
+Este código reemplaza partes de la plantilla HTML con información del archivo json. Ahora puedo llamar esta función desde cualquier archivo de mi proyecto sin necesidad de repetir código.
+
+
+## NPM (Node Package Manager)
+Es una poderosa herramienta del ecosistema de Node.js que permite a los desarrolladores instalar, gestionar y compartir paquetes de software reutilizables. Estos paquetes contienen código predefinido y funcionalidades que pueden ser incorporados en proyectos de Node.js para agilizar el desarrollo, evitando tener que escribir todo el código desde cero.
+
+#### Tipos de dependencias:
+- **Simple dependencies:** Paquetes que usaremos dentro de nuestro projecto. Código sobre el que sentaremos nuestras bases. Por lo tanto, estos paquetes son requeridos para que nuestro programa funcione óptimamente.
+- **Development dependencies:** Se refieren a los paquetes y bibliotecas que son necesarios durante el proceso de desarrollo de un proyecto, pero no son esenciales para su funcionamiento en producción. Testing, linters, compiladores, entre otros.
+
+### Instalación de paquetes
+```
+npm install nombre_del_paquete  //dependencia regular
+npm install -D nombre_del_paquete  //dependencia de desarrollo
+npm install nombre_del_paquete --global //dependencia global
+```
